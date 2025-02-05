@@ -1,5 +1,9 @@
 @use './styles/variables' as vars;
 
+body {
+    background-color: vars.$bg-color;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -1,0 +1,17 @@
+<app-auth-layout>
+    <form>
+        <div class="inputs">
+            <vini-text-field-input label="Email" placeholder="Digite seu email" />
+            <vini-text-field-input label="Senha" placeholder="Digite sua senha" />
+        </div>
+        <div class="options">
+            <vini-button type="primary" text="Entrar" />
+            <div class="divisor">
+                <div class="divisor-bar"></div>
+                <span>OU</span>
+                <div class="divisor-bar"></div>
+            </div>
+            <vini-button type="secundary" text="Registrar" routerLink="/{{constants.REGISTER_PATH}}"/>
+        </div>
+    </form>
+</app-auth-layout>

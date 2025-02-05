@@ -1,0 +1,41 @@
+@use '../../../../styles/variables' as vars;
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 80px;
+    border-bottom: 1px solid vars.$stronk-color;
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        ul {
+            list-style: none;
+
+            li {
+                a {
+                    text-decoration: none;
+                    outline: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                    
+                    &.active {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .divisor {
+            height: 20px;
+            width: 1px;
+            background-color: vars.$stronk-color;
+        }
+    }
+
+}

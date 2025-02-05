@@ -1,0 +1,41 @@
+@use '../../../../../styles/variables' as vars;
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: vars.$bg-side-color;
+    padding: 30px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .divisor {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            .divisor-bar {
+                flex: 1;
+                height: 1px;
+                background-color: vars.$text-light-color;
+            }
+
+            span {
+                color: vars.$text-light-color;
+                font-size: 10px;
+            }
+        }
+    }
+}

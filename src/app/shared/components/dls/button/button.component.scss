@@ -1,0 +1,33 @@
+@use '../../../../../styles/variables' as vars;
+
+button {
+    outline: none;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100%;
+
+    &.primary {
+        background: linear-gradient(to bottom right, vars.$primary-color, vars.$primary-light-color);
+        color: vars.$bg-color;
+
+        &:hover {
+            background: linear-gradient(to bottom right, vars.$primary-light-color, vars.$primary-color);
+            box-shadow: 0px 0px 3px 0 vars.$text-color;
+        }
+    }
+    
+    &.secundary {
+        background-color: vars.$bg-color;
+        border: 1px solid vars.$primary-color;
+        color: vars.$primary-color;
+        
+        &:hover {
+            border: 1px solid vars.$primary-light-color;
+            color: vars.$primary-light-color;
+            box-shadow: 0px 0px 3px 0 vars.$text-color;
+        }
+    }
+}
