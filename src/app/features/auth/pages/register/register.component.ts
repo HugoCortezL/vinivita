@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 import { getErrorMessage } from '../../../../core/utils/getErrorMessage';
 import { matchPasswordValidator } from '../../validators/matchPasswordValidator.validator';
 import { CommonModule } from '@angular/common';
+import { LoadingSpinnerComponent } from '../../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
     AuthLayoutComponent,
     ViniTextFieldInputComponent,
     ViniPasswordFieldInputComponent,
-    ViniButtonComponent
+    ViniButtonComponent,
+    LoadingSpinnerComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -30,6 +32,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   constants = Constants;
   getErrorMessage = getErrorMessage;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -52,6 +55,8 @@ export class RegisterComponent {
       email: this.form.controls['email'].value ?? '',
       password: this.form.controls['password'].value ?? '',
     };
+
+    this.isLoading = true;
     this.authService.register(user).subscribe({
       next: (response) => {
         this.router.navigate([`${this.constants.paths.REGISTER_PATH}/${this.constants.paths.CONFIRM_EMAIL_PATH}`], {
@@ -59,7 +64,8 @@ export class RegisterComponent {
         })
       },
       error: (error) => {
-        console.error('Erro ao registrar usuário', error);
+        this.form.setErrors({ unexpected: true })
+        this.isLoading = false;
       },
     });
   }

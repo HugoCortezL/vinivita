@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { ViniButtonComponent } from '../../../../shared/components/dls/button/button.component';
 
 @Component({
   selector: 'app-confirm-email',
-  imports: [],
+  imports: [RouterModule, ViniButtonComponent],
   templateUrl: './confirm-email.component.html',
   styleUrl: './confirm-email.component.scss'
 })
@@ -14,4 +15,6 @@ export class ConfirmEmailComponent {
     const navigation = this.router.getCurrentNavigation();
     this.email = navigation?.extras.state?.['email'] || '';
   }
+
+  resendEmail() { }
 }

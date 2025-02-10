@@ -1,12 +1,20 @@
-<div class="confirm-email">
-    <h1>
-        Verifique seu email
-    </h1>
-    <span class="email">
-        {{email || 'email@email.com'}}
-    </span>
-    <p>
-        Enviamos um e-mail para você com instruções sobre como configurar sua conta. Verifique sua caixa de entrada e
-        comece a conhecer o mundo dos vinhos.
-    </p>
+
+<div class="container">
+    <div class="confirm-email">
+        <header>
+            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email">
+            <h1> Verifique seu email! </h1>
+        </header>
+        <div class="main">
+            <p>Enviamos um e-mail de confirmação para <strong>{{ email }}</strong>.
+                Por favor, clique no link de verificação antes de fazer login.</p>
+
+            <p class="info">Se não encontrar o e-mail, verifique sua pasta de spam ou aguarde alguns minutos.</p>
+        </div>
+        <div class="options">
+            <vini-button type="primary" text="Reenviar E-mail" (click)="resendEmail()" />
+            <a routerLink="/entrar" class="login-link">Voltar para o Login</a>
+
+        </div>
+    </div>
 </div>

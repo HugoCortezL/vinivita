@@ -1,3 +1,5 @@
+<app-loading-spinner *ngIf="isLoading" />
+
 <app-auth-layout>
     <form *ngIf="!isOnConfirmEmailRoute()" [formGroup]="form">
         <div class="inputs">
@@ -7,6 +9,11 @@
                 [errorMessage]="getErrorMessage(form, 'password')" />
             <vini-password-field-input label="Confirmar senha" placeholder="Digite sua senha novamente"
                 formControlName="confirmPassword" [errorMessage]="getErrorMessage(form, 'confirmPassword')" />
+            @if(form.getError('unexpected')){
+            <div class="unexpected">
+                Um erro inesperado aconteceu
+            </div>
+            }
         </div>
         <div class="options">
             <vini-button type="primary" text="Registrar" (click)="register()" />

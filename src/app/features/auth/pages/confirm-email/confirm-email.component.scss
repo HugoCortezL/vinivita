@@ -1,18 +1,59 @@
 @use '../../../../../styles/variables' as vars;
 
+.container {
+    width: calc(100vw - 160px);
+    height: calc(100vh - 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .confirm-email {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    background-color: vars.$bg-side-color;
-    padding: 30px;
+    gap: 50px;
+    text-align: center;
+    padding: 50px;
+    box-shadow: 0 0 5px vars.$stronk-color;
+    border: 1px solid vars.$stronk-color;
     border-radius: 10px;
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
-    box-shadow: 0 0 4px vars.$text-color ;
 
-    span.email {
-        color: vars.$text-light-color;
-        text-decoration: underline;
+    header {
+        display: flex;
+        flex-direction: column;
+
+        img {
+            width: 80px;
+            margin: 0 auto 15px;
+        }
     }
+
+    .main {
+        .info {
+            font-size: 13px;
+            color: vars.$text-light-color;
+            margin-top: 10px;
+        }
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        a {
+            color: vars.$primary-color;
+            cursor: pointer;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+
+
 }

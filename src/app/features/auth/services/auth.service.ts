@@ -43,6 +43,7 @@ export class AuthService {
 
   logout(): void {
     this.clearToken();
+    window.location.reload()
   }
 
   isAuthenticated(): boolean {
