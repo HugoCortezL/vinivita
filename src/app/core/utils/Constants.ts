@@ -1,5 +1,16 @@
 export const Constants = {
-    HOME_PATH: '',
-    REGISTER_PATH: 'registrar',
-    LOGIN_PATH: 'entrar',
+    paths: {
+        HOME_PATH: '',
+        REGISTER_PATH: 'registrar',
+        LOGIN_PATH: 'entrar',
+    },
+    apiUrl: {
+        BASE_URL: "https://vinivita-backend.vercel.app/api/v1",
+        auth: {
+            AUTH_BASE: "auth",
+            AUTH_REGISTER: "register",
+            AUTH_LOGIN: "login"
+        }
+    }
+
 }

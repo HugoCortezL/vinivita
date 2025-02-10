@@ -6,15 +6,15 @@ import { Constants } from './core/utils/Constants';
 
 export const routes: Routes = [
     {
-        path: Constants.HOME_PATH,
+        path: Constants.paths.HOME_PATH,
         component: HomeComponent
     },
     {
-        path: Constants.REGISTER_PATH,
+        path: Constants.paths.REGISTER_PATH,
         component: RegisterComponent
     },
     {
-        path: Constants.LOGIN_PATH,
+        path: Constants.paths.LOGIN_PATH,
         component: LoginComponent
     },
 ];

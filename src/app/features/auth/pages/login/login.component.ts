@@ -5,6 +5,8 @@ import { ViniButtonComponent } from '../../../../shared/components/dls/button/bu
 import { RouterModule } from '@angular/router';
 import { Constants } from '../../../../core/utils/Constants';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { UserAuth } from '../../models/UserAuth.model';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
     ReactiveFormsModule,
     AuthLayoutComponent,
     ViniTextFieldInputComponent,
-    ViniButtonComponent
+    ViniButtonComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -22,12 +24,26 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 export class LoginComponent {
   constants = Constants;
 
+  constructor(private authService: AuthService) { }
+
   form = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   })
 
   login() {
-    console.log(this.form.controls['email'].value)
+    const user: UserAuth = {
+      email: this.form.controls['email'].value ?? '',
+      password: this.form.controls['password'].value ?? '',
+    };
+
+    this.authService.login(user).subscribe({
+      next: (response) => {
+        console.log('Usuário logado com sucesso!', response);
+      },
+      error: (error) => {
+        console.error('Erro ao logar usuário', error);
+      },
+    });
   }
 }
