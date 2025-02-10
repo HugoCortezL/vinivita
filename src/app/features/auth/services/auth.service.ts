@@ -6,6 +6,7 @@ import { Constants } from '../../../core/utils/Constants';
 import { tap } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environment/environment';
+import * as forge from 'node-forge';
 
 @Injectable({
   providedIn: 'root'
@@ -61,10 +62,9 @@ export class AuthService {
   }
 
   private hashPassword(password: string) {
-    console.log(`Password: ${password}`)
-    console.log(`SecretKey: ${this.SECRET_KEY}`)
-
-    return CryptoJS.AES.encrypt(password, this.SECRET_KEY).toString();
+    const publicKey = forge.pki.publicKeyFromPem(this.SECRET_KEY);
+    const encrypted = publicKey.encrypt(password, 'RSA-OAEP');
+    return forge.util.encode64(encrypted);
   }
 
 }

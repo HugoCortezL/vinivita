@@ -1,4 +1,6 @@
 export const environment = {
-    production: false,
-    NG_APP_SECRET_KEY: ''
+    production: true,
+    NG_APP_SECRET_KEY: `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0A6azr/fDWRbfCi0qwaMfNCsVnJSdiF1l+fGO2jcg/UU+qKt2ra0PlClFoRcIApYM1ihwYOMfSHBJNCbniuIhGsO9YqOLP7h3wpuKDoQcUjYA87483tGxDl9Dyj3HLBCqU0PLFHGrGEk43hYt/GqIvQO6rgQ/RohZ+h5qTj6gb1QSYu6ol2KEQ3pFfQ9bW/zmPUSm8uczyHUu3IUUrSehPi7cquXYSIQ3AAc7Q/vHrFXa4//VOqpx4xs88hEDGJbWis3jQQs+OcvIv6SbRGyYvf/MyX+AvJqMWLgtszpJpHt1w5SwKzf5dFXR5JzKJr1aY+7s1jzKU0c9JEqnYmcvQIDAQAB
+-----END PUBLIC KEY-----`
 };
