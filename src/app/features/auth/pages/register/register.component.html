@@ -1,9 +1,10 @@
 <app-auth-layout>
-    <form>
+    <form [formGroup]="form">
         <div class="inputs">
-            <vini-text-field-input label="Email" placeholder="Digite seu email" />
-            <vini-text-field-input label="Senha" placeholder="Digite sua senha" />
-            <vini-text-field-input label="Confirmar senha" placeholder="Digite sua senha novamente" />
+            <vini-text-field-input label="Email" placeholder="Digite seu email" formControlName="email" />
+            <vini-text-field-input label="Senha" placeholder="Digite sua senha" formControlName="password" />
+            <vini-text-field-input label="Confirmar senha" placeholder="Digite sua senha novamente"
+                formControlName="confirmPassword" />
         </div>
         <div class="options">
             <vini-button type="primary" text="Registrar" />
@@ -12,7 +13,7 @@
                 <span>OU</span>
                 <div class="divisor-bar"></div>
             </div>
-            <vini-button type="secundary" text="Entrar" routerLink="/{{constants.LOGIN_PATH}}"/>
+            <vini-button type="secundary" text="Entrar" routerLink="/{{constants.LOGIN_PATH}}" />
         </div>
     </form>
 </app-auth-layout>

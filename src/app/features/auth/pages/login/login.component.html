@@ -1,17 +1,18 @@
 <app-auth-layout>
-    <form>
+    <form [formGroup]="form">
         <div class="inputs">
-            <vini-text-field-input label="Email" placeholder="Digite seu email" />
-            <vini-text-field-input label="Senha" placeholder="Digite sua senha" />
+            <vini-text-field-input label="Email" name="email" placeholder="Digite seu email" formControlName="email" />
+            <vini-text-field-input label="Senha" name="password" placeholder="Digite sua senha"
+                formControlName="password" />
         </div>
-        <div class="options">
-            <vini-button type="primary" text="Entrar" />
+        <div class=" options">
+            <vini-button type="primary" text="Entrar" (click)="login()" />
             <div class="divisor">
                 <div class="divisor-bar"></div>
                 <span>OU</span>
                 <div class="divisor-bar"></div>
             </div>
-            <vini-button type="secundary" text="Registrar" routerLink="/{{constants.REGISTER_PATH}}"/>
+            <vini-button type="secundary" text="Registrar" routerLink="/{{constants.REGISTER_PATH}}" />
         </div>
     </form>
 </app-auth-layout>
