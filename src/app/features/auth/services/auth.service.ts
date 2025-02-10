@@ -4,7 +4,8 @@ import { UserAuth } from '../models/UserAuth.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../../../core/utils/Constants';
 import { tap } from 'rxjs/operators';
-import * as bcrypt from 'bcryptjs';
+import * as CryptoJS from 'crypto-js';
+import { environment } from '../../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class AuthService {
   }
 
   private hashPassword(password: string) {
-    return bcrypt.hashSync(password ?? '', 10);
+    return CryptoJS.AES.encrypt(password, environment.secretKey).toString();
   }
 
 }
