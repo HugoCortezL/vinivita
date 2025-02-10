@@ -41,7 +41,7 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    
+
     const user: UserAuth = {
       email: this.form.controls['email'].value ?? '',
       password: this.form.controls['password'].value ?? '',
@@ -52,6 +52,7 @@ export class LoginComponent {
         console.log('Usuário logado com sucesso!', response);
       },
       error: (error) => {
+        this.form.setErrors({ invalidCredentials: true })
         console.error('Erro ao logar usuário', error);
       },
     });

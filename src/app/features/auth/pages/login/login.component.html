@@ -5,6 +5,11 @@
                 [errorMessage]="getErrorMessage(form, 'email')" />
             <vini-password-field-input label="Senha" name="password" placeholder="Digite sua senha"
                 formControlName="password" [errorMessage]="getErrorMessage(form, 'password')" />
+            @if(form.getError('invalidCredentials')){
+            <div class="invalidLogin">
+                Email e/ou senha inválidos
+            </div>
+            }
         </div>
         <div class=" options">
             <vini-button type="primary" text="Entrar" (click)="login()" />
