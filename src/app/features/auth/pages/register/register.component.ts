@@ -59,6 +59,7 @@ export class RegisterComponent {
     this.isLoading = true;
     this.authService.register(user).subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.router.navigate([`${this.constants.paths.REGISTER_PATH}/${this.constants.paths.CONFIRM_EMAIL_PATH}`], {
           state: { email: user.email }
         })
