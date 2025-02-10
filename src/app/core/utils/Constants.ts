@@ -5,7 +5,8 @@ export const Constants = {
         LOGIN_PATH: 'entrar',
     },
     apiUrl: {
-        BASE_URL: "https://vinivita-backend.vercel.app/api/v1",
+        //BASE_URL: "https://vinivita-backend.vercel.app/api/v1",
+        BASE_URL: "https://vinivita.up.railway.app/api/v1",
         auth: {
             AUTH_BASE: "auth",
             AUTH_REGISTER: "register",
