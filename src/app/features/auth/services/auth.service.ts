@@ -61,6 +61,9 @@ export class AuthService {
   }
 
   private hashPassword(password: string) {
+    console.log(`Password: ${password}`)
+    console.log(`SecretKey: ${this.SECRET_KEY}`)
+
     return CryptoJS.AES.encrypt(password, this.SECRET_KEY).toString();
   }
 
