@@ -11,6 +11,8 @@ import { environment } from '../../../../environment/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  SECRET_KEY = (window as any)['NG_APP_SECRET_KEY'] || '';
+
   private tokenSubject = new BehaviorSubject<string | null>(this.getToken());
   token$ = this.tokenSubject.asObservable();
 
@@ -59,7 +61,7 @@ export class AuthService {
   }
 
   private hashPassword(password: string) {
-    return CryptoJS.AES.encrypt(password, environment.secretKey).toString();
+    return CryptoJS.AES.encrypt(password, this.SECRET_KEY).toString();
   }
 
 }
