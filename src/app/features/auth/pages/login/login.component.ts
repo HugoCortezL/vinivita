@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthLayoutComponent } from '../../../../shared/layouts/auth-layout/auth-layout.component';
 import { ViniTextFieldInputComponent } from '../../../../shared/components/dls/text-field-input/text-field-input.component';
@@ -9,6 +9,7 @@ import { Constants } from '../../../../core/utils/Constants';
 import { AuthService } from '../../services/auth.service';
 import { UserAuth } from '../../models/UserAuth.model';
 import { getErrorMessage } from '../../../../core/utils/getErrorMessage';
+import { ProfileService } from '../../../profile/services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,11 @@ export class LoginComponent {
   constants = Constants;
   getErrorMessage = getErrorMessage;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService,
+    private router: Router
+  ) { }
 
   form = new FormGroup({
     email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
@@ -49,11 +54,19 @@ export class LoginComponent {
 
     this.authService.login(user).subscribe({
       next: (response) => {
-        console.log('Usuário logado com sucesso!', response);
+
+        this.profileService.getProfile(response.data.value?.user_id || '').subscribe({
+          next: (response) => {
+            if (!response) {
+              this.router.navigate([`${this.constants.paths.CREATE_PROFILE_PATH}`])
+            } else {
+              this.router.navigate(['/'])
+            }
+          }
+        })
       },
       error: (error) => {
         this.form.setErrors({ invalidCredentials: true })
-        console.error('Erro ao logar usuário', error);
       },
     });
   }

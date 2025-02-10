@@ -7,6 +7,8 @@ import { tap } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environment/environment';
 import * as forge from 'node-forge';
+import { ApiResponse } from '../../../core/models/ApiResponse.model';
+import { UserLoginResponse } from '../models/UserLoginResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: UserAuth): Observable<any> {
+  register(user: UserAuth): Observable<ApiResponse> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_REGISTER}`, {
       ...user,
@@ -27,14 +29,14 @@ export class AuthService {
     }, { headers });
   }
 
-  login(user: UserAuth): Observable<any> {
+  login(user: UserAuth): Observable<ApiResponse<UserLoginResponse>> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_LOGIN}`, {
       ...user,
       password: this.hashPassword(user.password)
     }, { headers }).pipe(
       tap(response => {
-        this.setToken(response.data);
+        this.setToken(response.data.value!);
       })
     );
   }
@@ -47,17 +49,23 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  private setToken(token: string): void {
-    sessionStorage.setItem('authToken', token);
-    this.tokenSubject.next(token);
+  private setToken(userLoginResponse: UserLoginResponse): void {
+    localStorage.setItem('authToken', userLoginResponse.user_session_token);
+    localStorage.setItem('user_id', userLoginResponse.user_id);
+    this.tokenSubject.next(userLoginResponse.user_session_token);
   }
 
-  private getToken(): string | null {
-    return sessionStorage.getItem('authToken');
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  getUserId(): string {
+    return localStorage.getItem('user_id') ?? '';
   }
 
   private clearToken(): void {
-    sessionStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user_id');
     this.tokenSubject.next(null);
   }
 

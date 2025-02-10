@@ -1,0 +1,20 @@
+<app-main-layout>
+
+    <form [formGroup]="form">
+        <h1>
+            Criar perfil
+        </h1>
+        <div class="inputs">
+            <vini-text-field-input label="Nome" placeholder="Digite seu nome" formControlName="name"
+                [errorMessage]="getErrorMessage(form, 'name')" />
+            @if(form.getError('unexpected')){
+            <div class="unexpected">
+                Um erro inesperado aconteceu
+            </div>
+            }
+        </div>
+        <div class=" options">
+            <vini-button type="primary" text="Criar" (click)="updateProfile()" />
+        </div>
+    </form>
+</app-main-layout>

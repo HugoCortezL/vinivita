@@ -9,3 +9,8 @@ export interface Profile {
     name: string,
     user_role: ProfileRoles
 }
+
+export interface ProfileInput {
+    user_id: string,
+    name: string
+}

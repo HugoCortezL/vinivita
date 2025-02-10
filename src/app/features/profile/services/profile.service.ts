@@ -2,21 +2,31 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../../../core/utils/Constants';
-import { Profile } from '../models/Profile.model';
+import { ProfileInput } from '../models/Profile.model';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
   getProfile(userId: string): Observable<any> {
-    return this.http.get<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.profile.PROFILE_BASE}/${userId}`);
+    const headers = { 'authorization': `Bearer ${this.authService.getToken()}` };
+    return this.http.get<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.profile.PROFILE_BASE}/${userId}`, { headers });
   }
 
-  createProfile(profile: Profile): Observable<any> {
-    const headers = { 'Content-Type': 'application/json' };
+  createProfile(profile: ProfileInput): Observable<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+      'authorization': `Bearer ${this.authService.getToken()}`
+    };
     return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.profile.PROFILE_BASE}`, profile, { headers });
   }
+
+  
 }

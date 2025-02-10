@@ -1,0 +1,25 @@
+@use '../../../../../styles/variables' as vars;
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: vars.$bg-side-color;
+    padding: 30px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        div.unexpected {
+            color: vars.$primary-light-color;
+            font-size: 13px;
+        }
+    }
+}

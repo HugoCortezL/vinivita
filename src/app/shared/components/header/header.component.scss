@@ -23,7 +23,7 @@ header {
                     &:hover {
                         text-decoration: underline;
                     }
-                    
+
                     &.active {
                         text-decoration: underline;
                     }
@@ -36,6 +36,17 @@ header {
             width: 1px;
             background-color: vars.$stronk-color;
         }
+    }
+
+    .user-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        width: 160px;
+        height: 30px;
+        border: 1px solid vars.$stronk-color;
+
     }
 
 }

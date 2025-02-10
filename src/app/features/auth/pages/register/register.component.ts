@@ -43,28 +43,25 @@ export class RegisterComponent {
   }, { validators: matchPasswordValidator() })
 
   register() {
-    this.router.navigate([`${this.constants.paths.REGISTER_PATH}/${this.constants.paths.CONFIRM_EMAIL_PATH}`], {
-      state: { email: 'hugo@gmail.com' }
-    })
-    // if (this.form.invalid) {
-    //   this.form.markAllAsTouched();
-    //   return;
-    // }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-    // const user: UserAuth = {
-    //   email: this.form.controls['email'].value ?? '',
-    //   password: this.form.controls['password'].value ?? '',
-    // };
-    // this.authService.register(user).subscribe({
-    //   next: (response) => {
-    //     this.router.navigate([`${this.constants.paths.REGISTER_PATH}/${this.constants.paths.CONFIRM_EMAIL_PATH}`], {
-    //       state: { email: user.email }
-    //     })
-    //   },
-    //   error: (error) => {
-    //     console.error('Erro ao registrar usuário', error);
-    //   },
-    // });
+    const user: UserAuth = {
+      email: this.form.controls['email'].value ?? '',
+      password: this.form.controls['password'].value ?? '',
+    };
+    this.authService.register(user).subscribe({
+      next: (response) => {
+        this.router.navigate([`${this.constants.paths.REGISTER_PATH}/${this.constants.paths.CONFIRM_EMAIL_PATH}`], {
+          state: { email: user.email }
+        })
+      },
+      error: (error) => {
+        console.error('Erro ao registrar usuário', error);
+      },
+    });
   }
 
   isOnConfirmEmailRoute(): boolean {
