@@ -1,10 +1,12 @@
 <app-auth-layout>
     <form [formGroup]="form">
         <div class="inputs">
-            <vini-text-field-input label="Email" placeholder="Digite seu email" formControlName="email" />
-            <vini-password-field-input label="Senha" placeholder="Digite sua senha" formControlName="password" />
+            <vini-text-field-input label="Email" placeholder="Digite seu email" formControlName="email"
+                [errorMessage]="getErrorMessage(form, 'email')" />
+            <vini-password-field-input label="Senha" placeholder="Digite sua senha" formControlName="password"
+                [errorMessage]="getErrorMessage(form, 'password')" />
             <vini-password-field-input label="Confirmar senha" placeholder="Digite sua senha novamente"
-                formControlName="confirmPassword" />
+                formControlName="confirmPassword" [errorMessage]="getErrorMessage(form, 'confirmPassword')" />
         </div>
         <div class="options">
             <vini-button type="primary" text="Registrar" (click)="register()" />

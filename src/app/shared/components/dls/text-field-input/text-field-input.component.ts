@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'vini-text-field-input',

@@ -1,9 +1,10 @@
 <app-auth-layout>
     <form [formGroup]="form">
         <div class="inputs">
-            <vini-text-field-input label="Email" name="email" placeholder="Digite seu email" formControlName="email" />
+            <vini-text-field-input label="Email" name="email" placeholder="Digite seu email" formControlName="email"
+                [errorMessage]="getErrorMessage(form, 'email')" />
             <vini-password-field-input label="Senha" name="password" placeholder="Digite sua senha"
-                formControlName="password" />
+                formControlName="password" [errorMessage]="getErrorMessage(form, 'password')" />
         </div>
         <div class=" options">
             <vini-button type="primary" text="Entrar" (click)="login()" />

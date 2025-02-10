@@ -4,6 +4,7 @@ import { UserAuth } from '../models/UserAuth.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../../../core/utils/Constants';
 import { tap } from 'rxjs/operators';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,19 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   register(user: UserAuth): Observable<any> {
-    return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_REGISTER}`, user);
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_REGISTER}`, {
+      ...user,
+      password: this.hashPassword(user.password)
+    }, { headers });
   }
 
   login(user: UserAuth): Observable<any> {
-    return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_LOGIN}`, user).pipe(
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(`${Constants.apiUrl.BASE_URL}/${Constants.apiUrl.auth.AUTH_BASE}/${Constants.apiUrl.auth.AUTH_LOGIN}`, {
+      ...user,
+      password: this.hashPassword(user.password)
+    }, { headers }).pipe(
       tap(response => {
         this.setToken(response.token);
       })
@@ -30,21 +39,26 @@ export class AuthService {
     this.clearToken();
   }
 
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
   private setToken(token: string): void {
-    localStorage.setItem('authToken', token);
+    sessionStorage.setItem('authToken', token);
     this.tokenSubject.next(token);
   }
 
   private getToken(): string | null {
-    return localStorage.getItem('authToken');
+    return sessionStorage.getItem('authToken');
   }
 
   private clearToken(): void {
-    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
     this.tokenSubject.next(null);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  private hashPassword(password: string) {
+    return bcrypt.hashSync(password ?? '', 10);
   }
+
 }

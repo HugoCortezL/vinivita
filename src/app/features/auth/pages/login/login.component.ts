@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthLayoutComponent } from '../../../../shared/layouts/auth-layout/auth-layout.component';
 import { ViniTextFieldInputComponent } from '../../../../shared/components/dls/text-field-input/text-field-input.component';
 import { ViniButtonComponent } from '../../../../shared/components/dls/button/button.component';
@@ -8,6 +8,7 @@ import { ViniPasswordFieldInputComponent } from '../../../../shared/components/d
 import { Constants } from '../../../../core/utils/Constants';
 import { AuthService } from '../../services/auth.service';
 import { UserAuth } from '../../models/UserAuth.model';
+import { getErrorMessage } from '../../../../core/utils/getErrorMessage';
 
 @Component({
   selector: 'app-login',
@@ -25,15 +26,22 @@ import { UserAuth } from '../../models/UserAuth.model';
 })
 export class LoginComponent {
   constants = Constants;
+  getErrorMessage = getErrorMessage;
 
   constructor(private authService: AuthService) { }
 
   form = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+    password: new FormControl('', Validators.compose([Validators.required]))
   })
 
   login() {
+
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    
     const user: UserAuth = {
       email: this.form.controls['email'].value ?? '',
       password: this.form.controls['password'].value ?? '',

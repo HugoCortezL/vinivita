@@ -1,7 +1,7 @@
 <div class="text-field-group">
     <label for="{{safeId}}">{{label}}</label>
-    <input id="{{safeId}}" type="text" [placeholder]="placeholder" [value]="value" [disabled]="disabled"
-        (input)="onInput($event)" (blur)="onTouched()">
+    <input id="{{safeId}}" type="text" [class.error]="errorMessage" [placeholder]="placeholder" [value]="value"
+        [disabled]="disabled" (input)="onInput($event)" (blur)="onTouched()">
     @if (errorMessage) {
     <div class="error">{{errorMessage}}</div>
     }
