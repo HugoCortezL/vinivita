@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutComponent } from '../../../../shared/layouts/auth-layout/auth-layout.component';
 import { ViniTextFieldInputComponent } from '../../../../shared/components/dls/text-field-input/text-field-input.component';
 import { ViniButtonComponent } from '../../../../shared/components/dls/button/button.component';
-import { RouterModule } from '@angular/router';
+import { ViniPasswordFieldInputComponent } from '../../../../shared/components/dls/password-field-input/password-field-input.component';
 import { Constants } from '../../../../core/utils/Constants';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserAuth } from '../../models/UserAuth.model';
 
@@ -16,6 +17,7 @@ import { UserAuth } from '../../models/UserAuth.model';
     ReactiveFormsModule,
     AuthLayoutComponent,
     ViniTextFieldInputComponent,
+    ViniPasswordFieldInputComponent,
     ViniButtonComponent,
   ],
   templateUrl: './login.component.html',

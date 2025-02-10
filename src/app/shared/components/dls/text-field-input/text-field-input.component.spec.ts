@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextFieldInputComponent } from './text-field-input.component';
+import { ViniTextFieldInputComponent } from './text-field-input.component';
 
-describe('TextFieldInputComponent', () => {
-  let component: TextFieldInputComponent;
-  let fixture: ComponentFixture<TextFieldInputComponent>;
+describe('ViniTextFieldInputComponent', () => {
+  let component: ViniTextFieldInputComponent;
+  let fixture: ComponentFixture<ViniTextFieldInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TextFieldInputComponent]
+      imports: [ViniTextFieldInputComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(TextFieldInputComponent);
+    fixture = TestBed.createComponent(ViniTextFieldInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
