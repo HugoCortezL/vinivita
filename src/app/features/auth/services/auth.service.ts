@@ -34,7 +34,7 @@ export class AuthService {
       password: this.hashPassword(user.password)
     }, { headers }).pipe(
       tap(response => {
-        this.setToken(response.token);
+        this.setToken(response.data);
       })
     );
   }

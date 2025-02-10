@@ -1,0 +1,18 @@
+@use '../../../../../styles/variables' as vars;
+
+.confirm-email {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: vars.$bg-side-color;
+    padding: 30px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 4px vars.$text-color ;
+
+    span.email {
+        color: vars.$text-light-color;
+        text-decoration: underline;
+    }
+}
